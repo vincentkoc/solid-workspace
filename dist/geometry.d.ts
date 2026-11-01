@@ -1,4 +1,4 @@
-import type { Node, Group, Split } from './model';
+import type { Node, Group, Split } from "./model.js";
 export type Rect = {
     x: number;
     y: number;

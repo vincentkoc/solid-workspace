@@ -1,6 +1,6 @@
-import { type Element } from 'solid-js';
-import { type Drop, type Layout, type Tab } from './model';
-import { type Geometry } from './geometry';
+import { type Element } from "solid-js";
+import { type Drop, type Layout, type Tab } from "./model.js";
+import { type Geometry } from "./geometry.js";
 export type WorkspaceProps = {
     layout: Layout;
     onChange: (layout: Layout) => void;

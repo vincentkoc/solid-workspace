@@ -1,3 +1,3 @@
-export * from './model';
-export {Workspace, type WorkspaceProps} from './workspace';
-export {geometry, type Geometry, type Rect} from './geometry';
+export * from "./model.js";
+export { Workspace, type WorkspaceProps } from "./workspace.js";
+export { geometry, type Geometry, type Rect } from "./geometry.js";

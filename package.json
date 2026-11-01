@@ -1,13 +1,13 @@
 {
   "name": "@vincentkoc/solid-workspace",
   "version": "0.1.0",
-  "type": "module",
   "license": "MIT",
   "files": [
     "dist",
     "README.md",
     "LICENSE"
   ],
+  "type": "module",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -25,23 +25,23 @@
     "test": "tsx --test test/model.test.ts",
     "dev": "vite --host 127.0.0.1"
   },
-  "peerDependencies": {
-    "solid-js": "2.0.0-rc.18",
-    "@solidjs/web": "2.0.0-rc.18"
-  },
   "devDependencies": {
-    "solid-js": "2.0.0-rc.18",
-    "@solidjs/web": "2.0.0-rc.18",
     "@solidjs/vite-plugin": "3.0.0-next.51",
-    "typescript": "^5.9.3",
-    "tsx": "^4.20.6",
-    "vite": "8.3.5",
+    "@solidjs/web": "2.0.0-rc.18",
     "@types/node": "^22.18.0",
-    "playwright": "^1.56.1"
+    "playwright": "^1.56.1",
+    "solid-js": "2.0.0-rc.18",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "vite": "8.3.5"
+  },
+  "peerDependencies": {
+    "@solidjs/web": "2.0.0-rc.18",
+    "solid-js": "2.0.0-rc.18"
   },
   "overrides": {
-    "@solidjs/compiler": "2.0.0-rc.18",
     "@solidjs/babel-plugin": "2.0.0-rc.18",
+    "@solidjs/compiler": "2.0.0-rc.18",
     "@solidjs/signals": "2.0.0-rc.18"
   }
 }

@@ -54,6 +54,15 @@ Its tab descriptor and presentation arguments are accessors. No resource handles
 JSX, credentials, or application state belong in the serialized layout. The
 application owns resource creation, closing permissions, and persistence.
 
+## Application-owned content
+
+For resource hosts that already belong to an application, omit `renderTab` and
+consume `onGeometry` to position those existing hosts without changing their DOM
+parent. Group rectangles include the fixed 36px tab header; subtract that header
+from the content rectangle. Route `onCloseTab` through the application's own
+close/confirmation contract. This controlled mode intentionally does not retire
+resources itself; the application removes the tab after it accepts the close.
+
 ## Contracts
 
 - `Layout.version` is 1; the root is a binary split or group. Split ratios are

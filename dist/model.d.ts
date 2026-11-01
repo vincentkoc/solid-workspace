@@ -1,21 +1,21 @@
 /** Plain immutable layout owner. No renderer state or resource handles are serialized. */
-export type Edge = 'left' | 'right' | 'top' | 'bottom';
+export type Edge = "left" | "right" | "top" | "bottom";
 export type Tab = {
     id: string;
     title: string;
     pinned?: boolean;
 };
 export type Group = {
-    kind: 'group';
+    kind: "group";
     id: string;
     tabs: Tab[];
     selected: string | null;
     locked?: boolean;
 };
 export type Split = {
-    kind: 'split';
+    kind: "split";
     id: string;
-    axis: 'horizontal' | 'vertical';
+    axis: "horizontal" | "vertical";
     ratio: number;
     first: Node;
     second: Node;
