@@ -1,0 +1,14 @@
+.sw-workspace{position:relative;width:100%;height:100%;min-height:120px;overflow:hidden;background:var(--sw-background,#161923);color:var(--sw-color,#e9eaf1);font:14px system-ui}
+.sw-workspace button{font:inherit;color:inherit;background:transparent;border:0;padding:6px;cursor:pointer}
+.sw-workspace button:disabled{opacity:.4;cursor:default}
+.sw-workspace button:focus-visible,.sw-divider:focus-visible{outline:2px solid var(--sw-accent,#8dacf9);outline-offset:-2px}
+.sw-content,.sw-header,.sw-divider,.sw-drop{position:absolute;box-sizing:border-box}
+.sw-content{overflow:auto}.sw-content[hidden]{display:none}
+.sw-header{display:flex;overflow:auto;background:var(--sw-header,#242936);white-space:nowrap}
+.sw-tab-wrap{display:inline-flex;flex-shrink:0;align-items:center;border-right:1px solid #5555}
+.sw-header [aria-selected=true]{background:var(--sw-accent,#8dacf9);color:#10131c}
+.sw-divider{background:var(--sw-divider,#363d50);touch-action:none;z-index:4}
+.sw-divider[aria-orientation=vertical]{cursor:col-resize}.sw-divider[aria-orientation=horizontal]{cursor:row-resize}
+.sw-drop{pointer-events:none;z-index:3}.sw-dragging .sw-drop{pointer-events:auto;border:2px dashed var(--sw-accent,#8dacf9)}
+.sw-announcement{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.sw-move{position:absolute;z-index:5;inset:36px auto auto 8px;padding:12px;background:#242936;border:1px solid #8dacf9;max-height:80%;overflow:auto}.sw-move[hidden]{display:none}
