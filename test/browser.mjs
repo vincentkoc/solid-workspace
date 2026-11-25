@@ -5,6 +5,13 @@ const browser = await chromium.launch({
   ...(process.env.CHROMIUM_PATH ? { executablePath: process.env.CHROMIUM_PATH } : {}),
 });
 try {
+  const staticPage = await browser.newPage({ javaScriptEnabled: false });
+  await staticPage.goto("http://127.0.0.1:5197");
+  const staticTarget = await staticPage
+    .getByRole("link", { name: "Skip to workspace" })
+    .getAttribute("href");
+  assert.equal(staticTarget, `#${await staticPage.getByRole("main").getAttribute("id")}`);
+  await staticPage.close();
   const page = await browser.newPage({ viewport: { width: 1200, height: 800 } }),
     errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
@@ -14,7 +21,7 @@ try {
   await page.goto("http://127.0.0.1:5197");
   const skip = page.getByRole("link", { name: "Skip to workspace" });
   const main = page.getByRole("main");
-  await main.waitFor();
+  await page.getByRole("tab", { name: "Notes", exact: true }).waitFor();
   await page.keyboard.press("Tab");
   assert.ok(await skip.evaluate((link) => link === document.activeElement));
   await page.keyboard.press("Enter");

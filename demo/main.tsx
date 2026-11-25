@@ -1,5 +1,5 @@
 import { createSignal, onCleanup } from "solid-js";
-import { render } from "@solidjs/web";
+import { Portal, render } from "@solidjs/web";
 import { Workspace, parseLayout, type Layout, type Tab } from "../src";
 import "../src/style.css";
 const initial: Layout = {
@@ -75,7 +75,7 @@ function App() {
   });
   return (
     <>
-      <header style={{ padding: "12px", color: "white", background: "#10131c" }}>
+      <Portal mount={document.getElementById("toolbar")!}>
         Solid 2 Workspace{" "}
         <button onClick={() => localStorage.setItem("workspace", JSON.stringify(layout()))}>
           Save layout
@@ -88,15 +88,13 @@ function App() {
         >
           Restore layout
         </button>
-      </header>
-      <main id="workspace" tabindex="-1" style={{ height: "calc(100vh - 50px)" }}>
-        <Workspace
-          layout={layout()}
-          onChange={setLayout}
-          renderTab={(tab) => <Content tab={tab()} />}
-        />
-      </main>
+      </Portal>
+      <Workspace
+        layout={layout()}
+        onChange={setLayout}
+        renderTab={(tab) => <Content tab={tab()} />}
+      />
     </>
   );
 }
-render(() => <App />, document.getElementById("app")!);
+render(() => <App />, document.getElementById("workspace")!);
