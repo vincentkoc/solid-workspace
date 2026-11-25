@@ -89,13 +89,13 @@ function App() {
           Restore layout
         </button>
       </header>
-      <div style={{ height: "calc(100vh - 50px)" }}>
+      <main id="workspace" tabindex="-1" style={{ height: "calc(100vh - 50px)" }}>
         <Workspace
           layout={layout()}
           onChange={setLayout}
           renderTab={(tab) => <Content tab={tab()} />}
         />
-      </div>
+      </main>
     </>
   );
 }

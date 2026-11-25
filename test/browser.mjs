@@ -12,6 +12,15 @@ try {
     if (m.type() === "warning" || m.type() === "error") errors.push(m.text());
   });
   await page.goto("http://127.0.0.1:5197");
+  const skip = page.getByRole("link", { name: "Skip to workspace" });
+  const main = page.getByRole("main");
+  await main.waitFor();
+  await page.keyboard.press("Tab");
+  assert.ok(await skip.evaluate((link) => link === document.activeElement));
+  await page.keyboard.press("Enter");
+  assert.ok(await main.evaluate((element) => element === document.activeElement));
+  await page.keyboard.press("Tab");
+  assert.ok(await main.evaluate((element) => element.contains(document.activeElement)));
   await page.getByRole("textbox", { name: "Notes", exact: true }).fill("Retained scratchpad");
   const frame = page.frameLocator("iframe");
   await frame.getByRole("textbox").fill("Retained iframe");
