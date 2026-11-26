@@ -118,6 +118,7 @@ export function Workspace(props: WorkspaceProps) {
     pointerCleanup = end;
   }
   function TabButton(p: { tab: Tab; group: Group }) {
+    const canMoveOrClose = () => !p.tab.pinned && !p.group.locked;
     return (
       <span class="sw-tab-wrap">
         <button
@@ -125,7 +126,7 @@ export function Workspace(props: WorkspaceProps) {
           data-tab-id={p.tab.id}
           aria-selected={p.group.selected === p.tab.id ? "true" : "false"}
           tabindex={p.group.selected === p.tab.id ? 0 : -1}
-          draggable={!p.tab.pinned && !p.group.locked ? "true" : "false"}
+          draggable={canMoveOrClose() ? "true" : "false"}
           onDragStart={(e) => {
             dragging = p.tab.id;
             setDragging(true);
@@ -162,7 +163,7 @@ export function Workspace(props: WorkspaceProps) {
               const id = p.group.tabs[next].id;
               publish(select(props.layout, id), "Tab selected", id);
             }
-            if (e.key === "Delete" && !p.tab.pinned) {
+            if (e.key === "Delete" && canMoveOrClose()) {
               e.preventDefault();
               dismiss(p.tab.id);
             }
@@ -173,14 +174,14 @@ export function Workspace(props: WorkspaceProps) {
         </button>
         <button
           aria-label={`Move ${p.tab.title}`}
-          disabled={p.tab.pinned || p.group.locked}
+          disabled={!canMoveOrClose()}
           onClick={() => setMoving(p.tab.id)}
         >
           ↗
         </button>
         <button
           aria-label={`Close ${p.tab.title}`}
-          disabled={p.tab.pinned || p.group.locked}
+          disabled={!canMoveOrClose()}
           onClick={() => dismiss(p.tab.id)}
         >
           ×

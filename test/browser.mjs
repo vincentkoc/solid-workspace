@@ -86,6 +86,14 @@ try {
   await page.screenshot({ path: "/tmp/solid-workspace-proof.png" });
   await page.getByRole("button", { name: "Close Counter", exact: true }).click();
   assert.equal(await page.evaluate(() => window.workspaceTest.disposals), 1);
+  const closeRequests = await page.evaluateHandle(async () => {
+    const { watchCloseRequests } = await import("/test/close-policy.tsx");
+    return watchCloseRequests();
+  });
+  assert.ok(await page.getByRole("button", { name: "Close Locked tab" }).isDisabled());
+  await page.getByRole("tab", { name: "Locked tab", exact: true }).press("Delete");
+  await page.getByRole("tab", { name: "Editable tab", exact: true }).press("Delete");
+  assert.deepEqual(await closeRequests.jsonValue(), ["Editable tab"]);
   assert.deepEqual(errors, []);
   console.log(
     "PASS: native drag, keyboard split/resize, textarea/counter/iframe retention, restore, close cleanup; no browser warnings",

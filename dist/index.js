@@ -86,38 +86,39 @@ function j(r) {
 		window.addEventListener("pointermove", c), window.addEventListener("pointerup", l), window.addEventListener("pointercancel", l), N = l;
 	}
 	function q(e) {
-		var t = C(), n = t.firstChild, i = n.firstChild, o = i.nextSibling, s = n.nextSibling, u = s.nextSibling;
-		return n._$$keydown = (t) => {
-			let n = e.group.tabs.findIndex((t) => t.id === e.tab.id), i;
-			if (t.key === "ArrowRight" && (i = (n + 1) % e.group.tabs.length), t.key === "ArrowLeft" && (i = (n + e.group.tabs.length - 1) % e.group.tabs.length), t.key === "Home" && (i = 0), t.key === "End" && (i = e.group.tabs.length - 1), i !== void 0) {
-				t.preventDefault();
-				let n = e.group.tabs[i].id;
-				W(a(r.layout, n), "Tab selected", n);
+		let t = () => !e.tab.pinned && !e.group.locked;
+		var n = C(), i = n.firstChild, o = i.firstChild, s = o.nextSibling, u = i.nextSibling, d = u.nextSibling;
+		return i._$$keydown = (n) => {
+			let i = e.group.tabs.findIndex((t) => t.id === e.tab.id), o;
+			if (n.key === "ArrowRight" && (o = (i + 1) % e.group.tabs.length), n.key === "ArrowLeft" && (o = (i + e.group.tabs.length - 1) % e.group.tabs.length), n.key === "Home" && (o = 0), n.key === "End" && (o = e.group.tabs.length - 1), o !== void 0) {
+				n.preventDefault();
+				let t = e.group.tabs[o].id;
+				W(a(r.layout, t), "Tab selected", t);
 			}
-			t.key === "Delete" && !e.tab.pinned && (t.preventDefault(), H(e.tab.id));
-		}, n._$$click = () => W(a(r.layout, e.tab.id), `${e.tab.title} selected`), n.addEventListener("drop", (t) => {
+			n.key === "Delete" && t() && (n.preventDefault(), H(e.tab.id));
+		}, i._$$click = () => W(a(r.layout, e.tab.id), `${e.tab.title} selected`), i.addEventListener("drop", (t) => {
 			t.preventDefault(), t.stopPropagation(), h && G(h, {
 				group: e.group.id,
 				index: e.group.tabs.findIndex((t) => t.id === e.tab.id)
 			}), h = null, M(!1);
-		}), n.addEventListener("dragover", (e) => {
+		}), i.addEventListener("dragover", (e) => {
 			h && e.preventDefault();
-		}), n.addEventListener("dragend", () => {
+		}), i.addEventListener("dragend", () => {
 			h = null, M(!1);
-		}), n.addEventListener("dragstart", (t) => {
+		}), i.addEventListener("dragstart", (t) => {
 			h = e.tab.id, M(!0), t.dataTransfer?.setData("text/plain", e.tab.id);
-		}), l(n, () => e.tab.pinned ? "• " : "", i), l(n, () => e.tab.title, o), s._$$click = () => R(e.tab.id), u._$$click = () => H(e.tab.id), c(() => ({
+		}), l(i, () => e.tab.pinned ? "• " : "", o), l(i, () => e.tab.title, s), u._$$click = () => R(e.tab.id), d._$$click = () => H(e.tab.id), c(() => ({
 			e: e.tab.id,
 			t: e.group.selected === e.tab.id ? "true" : "false",
 			a: e.group.selected === e.tab.id ? 0 : -1,
-			o: !e.tab.pinned && !e.group.locked ? "true" : "false",
+			o: t() ? "true" : "false",
 			i: `Move ${e.tab.title}`,
-			n: e.tab.pinned || e.group.locked,
+			n: !t(),
 			s: `Close ${e.tab.title}`,
-			h: e.tab.pinned || e.group.locked
-		}), ({ e, t, a: r, o: i, i: a, n: o, s: c, h: l }, d) => {
-			e !== d?.e && p(n, "data-tab-id", e), t !== d?.t && p(n, "aria-selected", t), r !== d?.a && p(n, "tabindex", r), i !== d?.o && p(n, "draggable", i), a !== d?.i && p(s, "aria-label", a), o !== d?.n && p(s, "disabled", o), c !== d?.s && p(u, "aria-label", c), l !== d?.h && p(u, "disabled", l);
-		}), t;
+			h: !t()
+		}), ({ e, t, a: n, o: r, i: a, n: o, s, h: c }, l) => {
+			e !== l?.e && p(i, "data-tab-id", e), t !== l?.t && p(i, "aria-selected", t), n !== l?.a && p(i, "tabindex", n), r !== l?.o && p(i, "draggable", r), a !== l?.i && p(u, "aria-label", a), o !== l?.n && p(u, "disabled", o), s !== l?.s && p(d, "aria-label", s), c !== l?.h && p(d, "disabled", c);
+		}), n;
 	}
 	var J = w(), Y = J.firstChild, X = Y.nextSibling, Z = X.nextSibling, Q = Z.nextSibling, $ = Q.firstChild.nextSibling;
 	return f(() => (e) => {
