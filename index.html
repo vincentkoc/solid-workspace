@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Solid Workspace</title>
+    <style>
+      .skip-link {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        transform: translateY(-100%);
+        padding: 0.5em 1em;
+        color: CanvasText;
+        background: Canvas;
+      }
+      .skip-link:focus { transform: none; }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#workspace">Skip to workspace</a>
+    <header id="toolbar" style="padding: 12px; color: white; background: #10131c"></header>
+    <main id="workspace" tabindex="-1" style="height: calc(100vh - 50px)"></main>
+    <script type="module" src="/demo/main.tsx"></script>
+  </body>
+</html>
